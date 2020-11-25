@@ -9,24 +9,14 @@ except Exception:
 
 def draw():
     screen.fill((0, 0, 0))
-    color = ()
-    for i in range(1, n + 1):
-        if i % 2 == 0 or i == 1:
-            color = (255, 0, 0)
-        elif i % 3 == 0:
-            color = (0, 255, 0)
-        else:
-            color = (0, 0, 255)
-
-        pygame.draw.circle(screen, color, (w * n, w * n), (n + 1 - i) * w)
-
+    pygame.draw.circle(screen, (255, 0, 0), (n * w / 2, n * w / 2), 40, width=10)
 
 
 if __name__ == '__main__':
     # инициализация Pygame:
     pygame.init()
     # размеры окна:
-    size = width, height = w * n * 2, w * n * 2
+    size = width, height = w * n, w * n
     # screen — холст, на котором нужно рисовать:
     screen = pygame.display.set_mode(size)
     draw()
