@@ -10,33 +10,32 @@ if __name__ == '__main__':
     pygame.display.set_caption('Жёлтый круг')
     size = width, height = 1000, 400
     screen = pygame.display.set_mode(size)
-    screen.fill((0, 0, 255))
-    draw()
+    screen.fill((0, 0, 0))
 
-    fps = 60
+    fps = 100
     clock = pygame.time.Clock()
     running = True
-    movement = False
-    r = 1
-    x_min = 1
-    y_min = 1
-    rt = False
-    x = 0
-    y = 0
-    v = 10
+    move_circles = False
+    circles = []
+    x, y = 0, 0
+    v = 100
+    pos = 0
+
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-            elif event.type == pygame.MOUSEBUTTONDOWN:
-                if x_min <= event.pos[0] <= x_min + 50 and y_min <= event.pos[1] <= y_min + 50:
-                    rt = True
-                    x, y = event.pos
-            elif event.type == pygame.MOUSEMOTION and rt:
-                movement = True
-        if movement:
-            pygame.draw.rect(screen, 'yellow', pygame.Rect(1 + , 1, 50, 50))
-            r += v / fps
+            elif event.type == pygame.MOUSEBUTTONUP:
+                circles.append(event.pos)
+                x, y = event.pos
+                pos = 0
+                move_circles = True
+        if move_circles:
+            for circle in circles:
+                screen.fill((0, 0, 0))
+                pygame.draw.circle(screen, 'white', (circle[0] - pos, circle[1] - pos), 10)
+                pos += v / fps
+
         clock.tick(fps)
         pygame.display.flip()
     pygame.quit()
